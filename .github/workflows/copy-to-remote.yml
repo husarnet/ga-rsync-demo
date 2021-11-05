@@ -1,0 +1,35 @@
+name: Copy files to remote host with no public IP
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  copy-to-remote-host:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Connecting to Husarnet VPN network
+      uses: husarnet/husarnet-action@v1
+      with:
+        join-code: ${{ secrets.HUSARNET_JOINCODE }}
+
+    - name: Wait until connection with peer is establish (with 2m timeout)
+      run: ping6 -w 120 -c 1 ${{ secrets.HUSARNET_TARGET_HOSTNAME }}
+
+    - name: Install SSH private key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+    - name: rsync over ssh
+      run: >
+        rsync -vr 
+        ./files/ 
+        root@${{ secrets.HUSARNET_TARGET_HOSTNAME }}:/root/files
+
+    - name: Stop husarnet
+      run: sudo systemctl stop husarnet
