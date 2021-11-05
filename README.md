@@ -29,7 +29,7 @@ That command will generate 2 files:
 | File | How to use it? |
 | - | - |
 | `ga-ssh-key` | Copy the `ga-ssh-key` file content here to `SSH_PRIVATE_KEY` GitHub secret|
-| `ga-ssh-key.pub` | Inside `my-raspberry` shell execute: `cat ga-ssh-key.pub >> /root/.ssh/authorized_keys` (or paste the file content manually to the new line at the and of `authorized_keys` file in e.g. vim if you generated keys on other host than `my-raspberry`) |
+| `ga-ssh-key.pub` | Inside `my-raspberry` shell execute: `cat ga-ssh-key.pub >> /root/.ssh/authorized_keys` (or paste the file content manually to the new line at the end of `authorized_keys` file in e.g. vim if you generated keys on other host than `my-raspberry`) |
 
 ### 🔐 `KNOWN_HOSTS`
 
