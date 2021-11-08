@@ -16,7 +16,7 @@ jobs:
       with:
         join-code: ${{ secrets.HUSARNET_JOINCODE }}
 
-    - name: Wait until connection with peer is establish (with 2m timeout)
+    - name: Wait until connection with peer is established (with 2m timeout)
       run: ping6 -w 120 -c 1 ${{ secrets.HUSARNET_TARGET_HOSTNAME }}
 
     - name: Install SSH private key
@@ -25,11 +25,11 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
-    - name: rsync over ssh
+    - name: Rsync over SSH
       run: >
         rsync -vr 
         ./files/ 
         root@${{ secrets.HUSARNET_TARGET_HOSTNAME }}:/root/files
 
-    - name: Stop husarnet
+    - name: Stop Husarnet
       run: sudo systemctl stop husarnet
