@@ -1,4 +1,4 @@
-name: Copy files to remote host with no public IP
+name: Copy files to Raspberry Pi
 
 on:
   push:
