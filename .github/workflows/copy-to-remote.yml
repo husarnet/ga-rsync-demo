@@ -1,4 +1,4 @@
-name: Copy files to Raspberry Pi
+name: Deploy to Raspberry Pi
 
 on:
   push:
